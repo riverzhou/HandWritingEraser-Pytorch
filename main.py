@@ -35,7 +35,7 @@ def get_argparser():
                               not (name.startswith("__") or name.startswith('_')) and callable(
         network.modeling.__dict__[name])
                               )
-    parser.add_argument("--model", type=str, default='deeplabv3plus_resnet101',
+    parser.add_argument("--model", type=str, default='deeplabv3plus_resnet50',
                         choices=available_models, help='model name')
     parser.add_argument("--separable_conv", action='store_true', default=False,
                         help="apply separable conv to decoder and aspp")
@@ -207,7 +207,7 @@ def main():
         num_workers=2
     )
 
-    model = network.modeling.deeplabv3plus_resnet101(num_classes=opts.num_classes, output_stride=opts.output_stride)
+    model = network.modeling.deeplabv3plus_resnet50(num_classes=opts.num_classes, output_stride=opts.output_stride)
     if opts.separable_conv and 'plus' in opts.model:
         network.convert_to_separable_conv(model.classifier)
     utils.set_bn_momentum(model.backbone, momentum=0.01)
@@ -342,7 +342,6 @@ def main():
 
 
 # python main.py --data_root datasets/HandWriting --loss_type focal_loss --gpu_id 0 --batch_size 2
-# python main.py --data_root datasets/HandWriting --loss_type focal_loss --gpu_id 0 --batch_size 2 --ckpt checkpoints/best_deeplabv3plus_resnet101_os16.pth --test_only --save_val_results
+# python main.py --data_root datasets/HandWriting --loss_type focal_loss --gpu_id 0 --batch_size 2 --ckpt checkpoints/best_deeplabv3plus_resnet50_os16.pth --test_only --save_val_results
 if __name__ == '__main__':
     main()
-
