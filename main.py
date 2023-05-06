@@ -341,7 +341,8 @@ def main():
                 return
 
 
-# python3 main.py --data_root /home/disk2/ray/datasets/HandWriting --loss_type focal_loss --gpu_id 2 --batch_size 4
-# python3 main.py --data_root /home/disk2/ray/datasets/HandWriting --loss_type focal_loss --gpu_id 2 --batch_size 4 --ckpt checkpoints/best_deeplabv3plus_resnet50_os16.pth --test_only --save_val_results
+# python main.py --data_root datasets/HandWriting --loss_type focal_loss --gpu_id 0 --batch_size 2
+# python main.py --data_root datasets/HandWriting --loss_type focal_loss --gpu_id 0 --batch_size 2 --ckpt checkpoints/best_deeplabv3plus_resnet101_os16.pth --test_only --save_val_results
 if __name__ == '__main__':
     main()
+
