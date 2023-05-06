@@ -7,6 +7,7 @@ import numbers
 import numpy as np
 from PIL import Image
 
+collections.Iterable = collections.abc.Iterable
 
 #  Extended Transforms for Semantic Segmentation
 class ExtRandomHorizontalFlip(object):

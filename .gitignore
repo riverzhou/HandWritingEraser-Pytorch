@@ -12,3 +12,5 @@ datasets/data/cityscapes
 test_results
 a.py
 get_date.py
+datasets/HandWriting
+images/ryan

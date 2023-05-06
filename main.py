@@ -80,7 +80,7 @@ def get_argparser():
                         help="download datasets")
 
     # Visdom options
-    parser.add_argument("--enable_vis", action='store_true', default=True,
+    parser.add_argument("--enable_vis", action='store_true', default=False,
                         help="use visdom for visualization")
     parser.add_argument("--vis_port", type=str, default='8097',
                         help='port for visdom')
