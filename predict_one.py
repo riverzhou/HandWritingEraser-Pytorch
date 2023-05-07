@@ -215,7 +215,7 @@ def main():
     os.environ['CUDA_VISIBLE_DEVICES'] = opts.device
     opts.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-    model = network.modeling.deeplabv3plus_resnet101(num_classes=3, output_stride=16)
+    model = network.modeling.deeplabv3plus_resnet50(num_classes=3, output_stride=16)
     # network.convert_to_separable_conv(model.classifier)
     checkpoint = torch.load(opts.mode_path, map_location=torch.device('cpu'))
     model.load_state_dict(checkpoint["model_state"])
