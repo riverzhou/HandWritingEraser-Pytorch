@@ -12,9 +12,10 @@ import torch.nn as nn
 import os
 from tqdm import tqdm
 
+output_dir = 'normal_result'
+
 """裁剪img"""
 CROP_SIZE = 1024
-
 
 def img_crop(img):
     '''
@@ -195,8 +196,10 @@ def erase_hand_write(img_path, model1, opt):
                     j].transpose(2, 1, 0)
 
         output_img = output_img.transpose(2, 1, 0).astype(np.uint8)
+    #output_img = cv2.cvtColor(output_img, cv2.COLOR_BGR2GRAY)
+    #_,output_img = cv2.threshold(output_img, 127, 255, cv2.THRESH_BINARY)
+    #output_img = cv2.adaptiveThreshold(output_img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, -30)
     return output_img
-
 
 def main():
     opts = argparse.ArgumentParser()
@@ -224,13 +227,14 @@ def main():
     model.to(opts.device)
     model.eval()
 
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
     img_list = os.listdir(opts.data_path)
     for i, item in tqdm(enumerate(img_list)):
         path = os.path.join(opts.data_path, item)
         res = erase_hand_write(path, model, opts)
-        save_path = 'results/normal_result/' + str(i) + '.png'
+        save_path = os.path.join(output_dir, f'{i}_{item}.png')
         cv2.imwrite(save_path, res)
-
 
 if __name__ == '__main__':
     main()
