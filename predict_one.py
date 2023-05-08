@@ -38,7 +38,7 @@ def img_crop(img):
                 if i == 1:
                     center_y = int(CROP_SIZE / 2)
                 elif i == y_number:
-                    center_y = h - 1024
+                    center_y = h - int(CROP_SIZE / 2)
                 else:
                     center_y = (h - CROP_SIZE) // (y_number - 1) * (i - 1) + int(CROP_SIZE / 2)
 
@@ -137,6 +137,7 @@ def erase_hand_write(img_path, model1, opt):
             img_path.save('tmp_img.png')
             predict_image = predict('tmp_img.png', model1, opt.device, opt.transform)  # [H, W, C]
             process_img_list[i].append(predict_image)
+            os.remove('tmp_img.png')
 
     shape_y = len(process_img_list)
     shape_x = len(process_img_list[0])
