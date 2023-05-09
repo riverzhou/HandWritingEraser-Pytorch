@@ -11,6 +11,8 @@ import matplotlib.pyplot as plt
 import torch.nn as nn
 import os
 from tqdm import tqdm
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 
 output_dir = 'normal_result'
 
