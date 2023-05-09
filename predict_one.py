@@ -236,5 +236,6 @@ def main():
         save_path = os.path.join(output_dir, f'{i}_{item}.png')
         cv2.imwrite(save_path, res)
 
+# predict_one.py --mode_path checkpoints\best_deeplabv3plus_resnet101_os16.pth --device 0 --data_path images\Test
 if __name__ == '__main__':
     main()
